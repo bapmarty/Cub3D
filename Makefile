@@ -55,4 +55,8 @@ norm:
 	@norminette -d includes
 	@$(ECHO) "Nominette done...\t[$(C_SUCCESS) ✅ $(C_RESET)]"
 
+up:
+	@$(ECHO) "Launching App..."
+	@./cub3d
+
 re: fclean all
