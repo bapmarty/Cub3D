@@ -1,32 +1,37 @@
-NAME		=	cub3d
+NAME				=	cub3d
 
-LIBFT		=	libft
+LIBFT				=	libft
 
-SRC_FOLDER	=	./src/
-SRC_FILES	=	cub3d.c
+SRC_FOLDER			=	./src/
+SRC_FILES			=	cub3d.c
 
-INCLUDE		=	-I./includes/
+SRC_PARSING			=	./parsing/
+SRC_PARSING_FILES	=	main_parsing.c
+SRCS_P				=	$(addprefix $(SRC_PARSING), $(SRC_PARSING_FILES))
 
-SRC			=	$(addprefix $(SRC_FOLDER), $(SRC_FILES))
-OBJ			=	$(SRC:.c=.o)
+INCLUDE				=	-I./includes/
 
+SRCS				=	$(addprefix $(SRC_FOLDER), $(SRCS_P))		\
+						$(addprefix $(SRC_FOLDER), $(SRC_FILES))
+
+OBJ					=	$(SRCS:.c=.o)
 
 # Bash command
-ECHO		=	echo
-CC			=	gcc
-RM			=	rm -rf
+ECHO				=	echo
+CC					=	gcc
+RM					=	rm -rf
 
 # Printing 
-C_RESET		=	\033[0m
-C_PENDING	=	\033[0;36m
-C_SUCCESS	=	\033[0;32m
+C_RESET				=	\033[0m
+C_PENDING			=	\033[0;36m
+C_SUCCESS			=	\033[0;32m
 
-ES_ERASE	=	"\033[A\033[K\033[A"
-ERASE		=	$(ECHO) $(ES_ERASE)
+ES_ERASE			=	"\033[A\033[K\033[A"
+ERASE				=	$(ECHO) $(ES_ERASE)
 
 # Compilation
-CFLAGS		=	-Wall -Wextra -Werror
-LIB_FT		=	-L./libft -lft
+CFLAGS				=	-Wall -Wextra -Werror
+LIB_FT				=	-L./libft -lft
 #LIB_LINUX	=	-I/usr/local/include -L/usr/local/lib -lmlx -L/usr/include -lm -lbsd -lX11 -lXext
 #LIB_MAC		=	-I/usr/local/include -L/usr/local/lib -lmlx -framework OpenGL -framework AppKit
 #LIB			=	$(LIB_MAC)
