@@ -5,17 +5,16 @@ LIBFT		=	libft
 SRC_FOLDER	=	./src/
 SRC_FILES	=	cub3d.c
 
-INCLUDE		=	./include/
+INCLUDE		=	-I./includes/
 
-OBJS		=	$(addprefix $(SRC_FOLDER), $(SRC_FILES))
-OBJS		:=	$(OBJS:.c=.o)
+SRC			=	$(addprefix $(SRC_FOLDER), $(SRC_FILES))
+OBJ			=	$(SRC:.c=.o)
 
 
 # Bash command
 ECHO		=	echo
 CC			=	gcc
 RM			=	rm -rf
-MAKE		=	make
 
 # Printing 
 C_RESET		=	\033[0m
@@ -27,23 +26,26 @@ ERASE		=	$(ECHO) $(ES_ERASE)
 
 # Compilation
 CFLAGS		=	-Wall -Wextra -Werror
-FRAMEWORK	=	-framework OpenGL -framework AppKit
 LIB_FT		=	-L./libft -lft
-#LIB_MAC		=	-I./mlx/ -L./mlx -lmlx $(FRAMEWORK)
+#LIB_LINUX	=	-I/usr/local/include -L/usr/local/lib -lmlx -L/usr/include -lm -lbsd -lX11 -lXext
+#LIB_MAC		=	-I/usr/local/include -L/usr/local/lib -lmlx -framework OpenGL -framework AppKit
+#LIB			=	$(LIB_MAC)
 
-.c.o:
-	$(CC) $(CFLAGS) -I $(INCLUDE) $(LIB_MAC) -o $@ -c $<
+%.o: %.c
+	$(CC) $(CFLAGS) -I./includes/ -o $@ -c $<
 
-$(NAME): $(OBJS)
-	@$(MAKE) -C $(LIBFT)
-	$(CC) $(CFLAGS) -I $(INCLUDE) -o $(NAME) $(OBJS) $(LIB_MAC) $(LIB_FT)
+$(NAME): $(OBJ)
+	@make -C $(LIBFT)
+	$(CC) $(CFLAGS) -I./includes/ -o $(NAME) $(OBJ) $(LIB_FT)
 
 all: $(NAME)
 
 clean:
+	@make $@ -C $(LIBFT)
 	$(RM) $(OBJS)
 
 fclean: clean
+	@make $@ -C $(LIBFT)
 	$(RM) $(NAME)
 
 norm:
@@ -54,9 +56,5 @@ norm:
 	@$(ECHO) "Nominette on includes...\t[$(C_PENDING) ⌛︎ $(C_RESET)]"
 	@norminette -d includes
 	@$(ECHO) "Nominette done...\t[$(C_SUCCESS) ✅ $(C_RESET)]"
-
-up:
-	@$(ECHO) "Launching App..."
-	@./cub3d
 
 re: fclean all
