@@ -6,7 +6,7 @@
 /*   By: bapmarti <bapmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:51:28 by bapmarti          #+#    #+#             */
-/*   Updated: 2021/03/15 12:28:13 by bapmarti         ###   ########.fr       */
+/*   Updated: 2021/03/16 13:06:37 by bapmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 
 # include <stdio.h>
+# include "libft.h"
 
 typedef struct	s_window {
 	int		width;
