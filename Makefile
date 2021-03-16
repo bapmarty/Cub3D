@@ -31,7 +31,7 @@ LIB_FT		=	-L./libft -lft
 #LIB_MAC		=	-I/usr/local/include -L/usr/local/lib -lmlx -framework OpenGL -framework AppKit
 #LIB			=	$(LIB_MAC)
 
-%.o: %.c
+.c.o:
 	$(CC) $(CFLAGS) -I./includes/ -o $@ -c $<
 
 $(NAME): $(OBJ)
